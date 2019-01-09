@@ -1,11 +1,7 @@
 #include <Arduino.h>
-//#include <Button.h>
 
-//Button button1(2); 
 int led[3] = {5,6,7};
   void setup() {
-//  button1.begin();  
-
     pinMode(led[0], OUTPUT);
     pinMode(led[1], OUTPUT);
     pinMode(led[2], OUTPUT);
