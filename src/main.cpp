@@ -1,93 +1,41 @@
 #include <Arduino.h>
+//#include <Button.h>
 
-int cervena = 11;
-int zluta = 12;
-int zelena = 10;
-const int pResistor = A0; 
-int value;
-void setup(){
-    pinMode(cervena, OUTPUT);
-    pinMode(zluta, OUTPUT);
-    pinMode(zelena, OUTPUT);
-    pinMode(pResistor, INPUT);
+//Button button1(2); 
+int led[3] = {5,6,7};
+  void setup() {
+//  button1.begin();  
+
+    pinMode(led[0], OUTPUT);
+    pinMode(led[1], OUTPUT);
+    pinMode(led[2], OUTPUT);
 }
 
 void semafor(){
-   }
-
-
-
-/*
-if(value>50)
-   digitalWrite(zelena, HIGH); 
-
-if(value>100)
-   digitalWrite(cervena, HIGH); 
-
-
-delay(1000);
-digitalWrite(zluta, LOW); 
-digitalWrite(zelena, LOW); 
-digitalWrite(cervena, LOW); 
-*/
-
-
-void loop(){
-    skar:
-    value = analogRead(pResistor);
-    if(value<25){
-    digitalWrite(cervena, HIGH);
+    digitalWrite(led[0], HIGH);
     delay(3000);
-}else{
-    digitalWrite(zluta, LOW);
-    digitalWrite(cervena, LOW);
-    digitalWrite(zelena, LOW);
-    goto skar;
-    }
-
-    value = analogRead(pResistor);
-    if(value<25){
-    digitalWrite(zluta, HIGH);
+    digitalWrite(led[2], LOW);
+    digitalWrite(led[1], HIGH);
     delay(1000);
-}else{
-    digitalWrite(zluta, LOW);
-    digitalWrite(cervena, LOW);
-    digitalWrite(zelena, LOW);
-    goto skar;
-    }
-    value = analogRead(pResistor);  
-    if(value<25){
-    digitalWrite(zluta, LOW);
-    digitalWrite(cervena, LOW);
-    digitalWrite(zelena, HIGH);
-    delay(3000);
-}else{
-    digitalWrite(zluta, LOW);
-    digitalWrite(cervena, LOW);
-    digitalWrite(zelena, LOW);
-    goto skar;
-    }
-    value = analogRead(pResistor);
-    if(value<25){
-    digitalWrite(zluta, HIGH);
-    digitalWrite(zelena, LOW);
-    delay(2000);
-}else{
-    digitalWrite(zluta, LOW);
-    digitalWrite(cervena, LOW);
-    digitalWrite(zelena, LOW);
-    goto skar;
-    }
-    value = analogRead(pResistor);
-    if(value<25){
-    digitalWrite(zluta, LOW);
-    digitalWrite(zelena, LOW);
-}else{
-    digitalWrite(zluta, LOW);
-    digitalWrite(cervena, LOW);
-    digitalWrite(zelena, LOW);
-    goto skar;
-    }
+    digitalWrite(led[1], LOW);
+    digitalWrite(led[0], LOW);
+    digitalWrite(led[2], HIGH);
+    
 
 }
+void chodec(){
+  //přepnutí semaforu na červenou
+    digitalWrite(led[2], LOW);
+    digitalWrite(led[1], HIGH);
+    delay(1000);
+    digitalWrite(led[1], LOW);
+    digitalWrite(led[0], HIGH);
+    delay(3000);
+    } 
 
+void loop() {
+  semafor();
+  while (digitalRead(A2) == LOW) { //počkej dokud chodec zmáčkne tlačítko
+      } 
+  chodec();
+}
